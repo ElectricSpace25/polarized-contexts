@@ -12,13 +12,13 @@ const urlParams = new URLSearchParams(window.location.search);
 const prolificID = urlParams.get("participant_id") || "unknown"; // If no Prolific ID is provided in the URL, the ID will be reported as 'unknown'
 
 // Assign Condition
-const conditions = ["untrustworthy", "biomodal", "trustworthy"]
+const conditions = ["trustworthy", "untrustworthy", "bimodal"];
 const condition = jsPsych.randomization.sampleWithoutReplacement(conditions, 1)[0];
 if (config.DEBUG_LOGS) console.log(`Condition: ${condition}`);
 
 
 // Timeline variables
-const adapatationTimelineVariables = utils.setupAdaptation();
+const adapatationTimelineVariables = utils.setupAdaptation(condition);
 
 const ratingTimelineVariables = ratingFaces.map(face => ({
     face: face,
