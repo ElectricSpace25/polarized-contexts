@@ -60,6 +60,14 @@ const adaptationTrial = {
     data: { trial_name: "adaptation" }
 };
 
+const fixationTrial = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "+",
+    choices: [],
+    trial_duration: 500,
+    data: { trial_name: "fixation" }
+};
+
 const instructionsTrial = {
     type: jsPsychSurvey,
     survey_json: content.instructionsContent,
@@ -97,7 +105,8 @@ var timeline = [];
 
 const adaptationTimeline = {
     timeline: [
-        adaptationTrial
+        fixationTrial,
+        adaptationTrial,
     ],
     timeline_variables: adapatationTimelineVariables
 };
@@ -111,13 +120,13 @@ const ratingTimeline = {
 
 timeline.push(
     //preload
-    screenerTrial,
-    adaptationInstructionsTrial,
+    // screenerTrial,
+    // adaptationInstructionsTrial,
     adaptationTimeline,
-    instructionsTrial,
-    ratingTimeline,
-    demographicsTrial,
-    finishedTrial
+    // instructionsTrial,
+    // ratingTimeline,
+    // demographicsTrial,
+    // finishedTrial
 );
 
 jsPsych.run(timeline);

@@ -2,6 +2,9 @@ export const config = {
 
     // Number of faces to highlight in adaptation trials
     NUM_HIGHLIGHTED_FACES: 1,
+
+    // Number of times to repeat the set of faces in adaptation trials (shuffled each time)
+    NUM_ADAPTATION_REPETITIONS: 5,
     
     // Link participants click after completing the study
     COMPLETION_LINK: "https://app.prolific.co/submissions/complete?cc=????????",
