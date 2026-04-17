@@ -62,7 +62,7 @@ const adaptationTrial = {
 
 const fixationTrial = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "+",
+    stimulus: "<h1>+</h1>",
     choices: [],
     trial_duration: 500,
     data: { trial_name: "fixation" }
@@ -77,8 +77,8 @@ const instructionsTrial = {
 const ratingTrial = {
     type: jsPsychImageButtonResponse,
     stimulus: jsPsych.timelineVariable("face"),
-    prompt: `<div id="prompt">How trustworthy is this face?</div>`,
-    choices: ["Extremely untrustworthy", "Moderately untrustworthy", "Slightly untrustworthy", "Neutral", "Moderately trustworthy", "Slightly trustworthy", "Extremely trustworthy"],
+    prompt: `<div id="prompt">How trustworthy does this person appear?</div>`,
+    choices: ["Extremely<br>Untrustworthy", "Moderately<br>Untrustworthy", "Slightly<br>Untrustworthy", "Neutral", "Moderately<br>Trustworthy", "Slightly<br>Trustworthy", "Extremely<br>Trustworthy"],
     data: { trial_name: "rating" }
 };
 
