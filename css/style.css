@@ -4,16 +4,18 @@
     align-items: center;
 }
 
-#jspsych-image-button-response-stimulus {
+#prompt {
     order: 1;
+    margin-bottom: 15px;
 }
 
-#prompt {
+#jspsych-image-button-response-stimulus {
     order: 2;
 }
 
 #jspsych-image-button-response-btngroup {
     order: 3;
+    margin-top: 10px;
 }
 
 .highlighted-face {
