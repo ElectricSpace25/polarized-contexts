@@ -115,18 +115,19 @@ const ratingTimeline = {
     timeline: [
         ratingTrial
     ],
-    timeline_variables: ratingTimelineVariables
+    timeline_variables: ratingTimelineVariables,
+    randomize_order: true
 };
 
 timeline.push(
-    //preload
-    // screenerTrial,
-    // adaptationInstructionsTrial,
+    // preload?
+    screenerTrial,
+    adaptationInstructionsTrial,
     adaptationTimeline,
-    // instructionsTrial,
-    // ratingTimeline,
-    // demographicsTrial,
-    // finishedTrial
+    instructionsTrial,
+    ratingTimeline,
+    demographicsTrial,
+    finishedTrial
 );
 
 jsPsych.run(timeline);
