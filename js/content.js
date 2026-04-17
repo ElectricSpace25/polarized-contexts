@@ -99,3 +99,15 @@ export const demographicsContent = {
         }
     ]
 };
+
+export const finishedContent = {
+    title: "Study Completed",
+    completeText: "Click here to return to Prolific",
+    elements:
+        [
+            {
+                type: "html",
+                html: "<p>Thank you for participating in the study!</p>",
+            }
+        ]
+};

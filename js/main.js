@@ -4,10 +4,18 @@ import { jsPsych } from './init.js';
 import * as utils from "./utils.js";
 import * as content from './content.js';
 
+const startTime = new Date().toLocaleString(); // Records the date and time at the start of the study
+export let complete = false; // This is set to true at the end of the study to indicate completion
+
 // Get Prolific ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const prolificID = urlParams.get("participant_id") || "unknown"; // If no Prolific ID is provided in the URL, the ID will be reported as 'unknown'
-//TODO: Actually save ID to data
+
+// Assign Condition
+const conditions = ["untrustworthy", "biomodal", "trustworthy"]
+const condition = jsPsych.randomization.sampleWithoutReplacement(conditions, 1)[0];
+if (config.DEBUG_LOGS) console.log(`Condition: ${condition}`);
+
 
 // Timeline variables
 const adapatationTimelineVariables = utils.setupAdaptation();
@@ -72,6 +80,17 @@ const demographicsTrial = {
     data: { trial_name: "demographics" }
 };
 
+const finishedTrial = {
+    type: jsPsychSurvey,
+    survey_json: content.finishedContent,
+    data: { trial_name: "info", prolific_id: prolificID, start_time: startTime, condition: condition},
+    on_finish: function (data) {
+        // Can't add end_time with data: {} because it will calculate time at start
+        data.end_time = new Date().toLocaleString();
+        complete = true;
+    },
+};
+
 
 // Timeline
 var timeline = [];
@@ -97,8 +116,8 @@ timeline.push(
     adaptationTimeline,
     instructionsTrial,
     ratingTimeline,
-    demographicsTrial
-    //finish trial probably
+    demographicsTrial,
+    finishedTrial
 );
 
 jsPsych.run(timeline);
