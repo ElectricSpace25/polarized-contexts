@@ -1,15 +1,13 @@
 import { jsPsych } from './init.js';
-import { adaptationFaces } from './config.js';
+import { config, adaptationFaces } from './config.js';
 
 export function setupAdaptation() {
-    const numHighlighted = 1;
-
     const faces = jsPsych.randomization.shuffle(adaptationFaces);
 
     const adaptationTimelineVariables = faces.map((path, index) => {
         let imgTag;
 
-        if (index < numHighlighted) {
+        if (index < config.NUM_HIGHLIGHTED_FACES) {
             imgTag = `<img src="${path}" class="highlighted-face">`;
         } else {
             imgTag = `<img src="${path}">`;

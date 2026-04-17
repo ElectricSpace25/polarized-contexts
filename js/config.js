@@ -1,4 +1,7 @@
 export const config = {
+
+    // Number of faces to highlight in adaptation trials
+    NUM_HIGHLIGHTED_FACES: 1,
     
     // Link participants click after completing the study
     COMPLETION_LINK: "https://app.prolific.co/submissions/complete?cc=????????",
