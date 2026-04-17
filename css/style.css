@@ -1,0 +1,21 @@
+.jspsych-content:has(#prompt) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#jspsych-image-button-response-stimulus {
+    order: 1;
+}
+
+#prompt {
+    order: 2;
+}
+
+#jspsych-image-button-response-btngroup {
+    order: 3;
+}
+
+.highlighted-face {
+    border: 5px solid yellow;
+}

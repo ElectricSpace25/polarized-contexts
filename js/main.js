@@ -1,12 +1,21 @@
 // Imports
-import { config } from './config.js';
+import { config, ratingFaces } from './config.js';
 import { jsPsych } from './init.js';
+import * as utils from "./utils.js";
 import * as content from './content.js';
 
 // Get Prolific ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const prolificID = urlParams.get("participant_id") || "unknown"; // If no Prolific ID is provided in the URL, the ID will be reported as 'unknown'
 //TODO: Actually save ID to data
+
+// Timeline variables
+const adapatationTimelineVariables = utils.setupAdaptation();
+
+const ratingTimelineVariables = ratingFaces.map(face => ({
+    face: face,
+}));
+
 
 // Preload
 // const preloadVideos = {
@@ -19,7 +28,7 @@ const prolificID = urlParams.get("participant_id") || "unknown"; // If no Prolif
 // Trials
 const screenerTrial = {
     type: jsPsychSurvey,
-    survey_json: content.screenerTrial,
+    survey_json: content.screenerContent,
     on_finish: function (data) {
         if (data.response.english == "No" || data.response.attention_check != "Other") {
             // Attention/Language check failed -> study will terminate with a failure code and no data saved
@@ -35,7 +44,13 @@ const adaptationInstructionsTrial = {
     data: { trial_name: "adaptation_instructions" }
 };
 
-//TODO: INSERT ADAPATATION TRIAL
+const adaptationTrial = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: jsPsych.timelineVariable("face"),
+    choices: [],
+    trial_duration: 3000,
+    data: { trial_name: "adaptation" }
+};
 
 const instructionsTrial = {
     type: jsPsychSurvey,
@@ -43,7 +58,13 @@ const instructionsTrial = {
     data: { trial_name: "instructions" }
 };
 
-//TODO: INSERT TEST TRIALS
+const ratingTrial = {
+    type: jsPsychImageButtonResponse,
+    stimulus: jsPsych.timelineVariable("face"),
+    prompt: `<div id="prompt">How trustworthy is this face?</div>`,
+    choices: ["Extremely untrustworthy", "Moderately untrustworthy", "Slightly untrustworthy", "Neutral", "Moderately trustworthy", "Slightly trustworthy", "Extremely trustworthy"],
+    data: { trial_name: "rating" }
+};
 
 const demographicsTrial = {
     type: jsPsychSurvey,
@@ -55,13 +76,27 @@ const demographicsTrial = {
 // Timeline
 var timeline = [];
 
+const adaptationTimeline = {
+    timeline: [
+        adaptationTrial
+    ],
+    timeline_variables: adapatationTimelineVariables
+};
+
+const ratingTimeline = {
+    timeline: [
+        ratingTrial
+    ],
+    timeline_variables: ratingTimelineVariables
+};
+
 timeline.push(
     //preload
     screenerTrial,
     adaptationInstructionsTrial,
-    //adaptation trials
+    adaptationTimeline,
     instructionsTrial,
-    //test trials
+    ratingTimeline,
     demographicsTrial
     //finish trial probably
 );

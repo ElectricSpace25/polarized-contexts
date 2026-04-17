@@ -9,3 +9,14 @@ export const config = {
     // When enabled, saves data locally
     DEBUG_SAVE: false
 };
+
+export const adaptationFaces = [
+    "images/adaptation/face1.png",
+    "images/adaptation/face2.png"
+];
+
+export const ratingFaces = [
+    "images/rating/face3.png",
+    "images/rating/face4.png",
+];
+
